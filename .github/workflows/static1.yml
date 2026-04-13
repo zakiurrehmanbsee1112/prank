@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Do You Love Me Afifa? 💖</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fad0c4 100%);
+            height: 100vh;
+            position: relative;
+            cursor: none;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            position: fixed;
+            width: 25px;
+            height: 25px;
+            background: radial-gradient(circle, #ff6b9d, transparent);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease;
+            mix-blend-mode: difference;
+            box-shadow: 0 0 20px rgba(255, 107, 157, 0.5);
+        }
+
+        /* Initial Beautiful Page */
+        .initial-screen {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            animation: heartbeat 2s infinite;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .heart {
+            font-size: clamp(70px, 18vw, 130px);
+            color: #ff4757;
+            animation: bounce 2s infinite;
+            margin-bottom: 25px;
+        }
+
+        .question {
+            font-size: clamp(2.5em, 9vw, 4em);
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+            margin-bottom: 20px;
+            font-weight: bold;
+            line-height: 1.2;
+        }
+
+        .name {
+            color: #ff6b9d;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-size: clamp(1.8em, 6vw, 2.5em);
+            margin-bottom: 40px;
+        }
+
+        .buttons-initial {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: clamp(18px, 5vw, 28px) clamp(30px, 10vw, 55px);
+            font-size: clamp(1.2em, 5vw, 1.8em);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            touch-action: manipulation;
+            position: relative;
+            z-index: 20;
+        }
+
+        .btn-yes {
+            background: linear-gradient(45deg, #ff6b9d, #ff8fab, #ff6b9d);
+            background-size: 200% 200%;
+            animation: yesGlow 2s infinite;
+            color: white;
+        }
+
+        .btn-no {
+            background: linear-gradient(45deg, #74b9ff, #0984e3, #74b9ff);
+            background-size: 200% 200%;
+            color: white;
+            animation: noPulse 1.5s infinite;
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        }
+
+        @keyframes yesGlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes noPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Moving NO Button Styles */
+        .no-button-moving {
+            position: fixed !important;
+            z-index: 1000 !important;
+            transform: translate(-50%, -50%) !important;
+            animation: buttonJump 0.6s ease-out !important;
+            box-shadow: 0 20px 60px rgba(116, 185, 255, 0.6) !important;
+        }
+
+        @keyframes buttonJump {
+            0% {
+                transform: translate(-50%, -50%) scale(1) rotate(0deg);
+            }
+            30% {
+                transform: translate(-50%, -50%) scale(1.2) rotate(10deg);
+            }
+            60% {
+                transform: translate(-50%, -50%) scale(0.9) rotate(-5deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1) rotate(0deg);
+            }
+        }
+
+        /* Moving Screen */
+        .moving-screen {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.98);
+            padding: clamp(30px, 8vw, 55px);
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+            max-width: 95vw;
+            width: 95vw;
+            backdrop-filter: blur(20px);
+            border: 4px solid rgba(255, 107, 157, 0.4);
+            animation: shake 0.8s infinite;
+        }
+
+        .love-message {
+            font-size: clamp(1.5em, 6vw, 2.2em);
+            color: #e17055;
+            margin-bottom: 25px;
+            font-weight: bold;
+            line-height: 1.3;
+            animation: pulse 1.8s infinite;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .moving-question {
+            font-size: clamp(2em, 7vw, 3em);
+            color: #2d3436;
+            margin-bottom: 30px;
+            font-weight: bold;
+            line-height: 1.2;
+        }
+
+        .buttons-moving {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Love Screen */
+        .love-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ff9a9e, #fecfef, #fad0c4, #ffecd2);
+            background-size: 400% 400%;
+            animation: gradientShift 10s ease infinite;
+            overflow: hidden;
+            z-index: 2000;
+        }
+
+        .floating-love {
+            position: absolute;
+            font-size: clamp(1.8em, 5vw, 3.2em);
+            font-weight: bold;
+            color: #ff4757;
+            pointer-events: none;
+            animation: float 7s infinite linear;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+            white-space: nowrap;
+        }
+
+        /* Animations */
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.1); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.1); }
+            70% { transform: scale(1); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-30px); }
+            60% { transform: translateY(-15px); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translate(-50%, -50%) translateX(0); }
+            25% { transform: translate(-50%, -50%) translateX(-12px); }
+            75% { transform: translate(-50%, -50%) translateX(12px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(120vh) rotate(0deg) scale(0.7);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(40vh) rotate(180deg) scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-120px) rotate(360deg) scale(0.7);
+                opacity: 0;
+            }
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Mobile */
+        @media (max-width: 480px) {
+            .buttons-initial, .buttons-moving {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            .btn {
+                width: 85%;
+                max-width: 320px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+
+    <!-- Initial Screen -->
+    <div id="initialScreen" class="initial-screen">
+        <div class="heart">💖💖💖</div>
+        <div class="question">Do you love me</div>
+        <div class="name">Afifa? 🥰</div>
+        <div class="buttons-initial">
+            <button class="btn btn-yes" onclick="handleAnswer('yes')">YES 😍💕</button>
+            <button class="btn btn-no" id="noButton" onclick="handleNoClick(event)">NO 😢</button>
+        </div>
+    </div>
+
+    <!-- Moving Screen -->
+    <div id="movingScreen" class="moving-screen hidden">
+        <div class="love-message" id="loveMessage">Afifa, you're my everything! 💖</div>
+        <div class="moving-question">Please say YES Afifa? 🥺💕</div>
+        <div class="buttons-moving">
+            <button class="btn btn-yes" onclick="handleAnswer('yes')">YES TOO! 😍💖</button>
+            <button class="btn btn-no" id="movingNoButton" onclick="handleNoClick(event)">NO 😭</button>
+        </div>
+    </div>
+
+    <!-- Love Screen -->
+    <div id="loveScreen" class="love-screen hidden"></div>
+
+    <script>
+        let messageIndex = 0;
+        const loveMessages = [
+            "Afifa, you complete my life! 💖✨",
+            "I can't breathe without you! 😍❤️",
+            "Please say YES my love! 🥺💕",
+            "You're my heart Afifa! 💓🌹",
+            "I love you to the moon! 🌙💫",
+            "Forever yours Afifa! 💍😘",
+            "You make my world perfect! 🌍💖",
+            "My soulmate Afifa! 👫✨"
+        ];
+
+        let noClickCount = 0;
+
+        // Custom Cursor
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = (e.clientX - 12.5) + 'px';
+            cursor.style.top = (e.clientY - 12.5) + 'px';
+        });
+
+        function handleAnswer(answer) {
+            if (answer === 'yes') {
+                showLoveScreen();
+            }
+        }
+
+        function handleNoClick(event) {
+            event.stopPropagation();
+            noClickCount++;
+            
+            // Move NO button to random position
+            moveNoButton();
+            
+            // After 3 NO clicks, show moving screen
+            if (noClickCount >= 3 && document.getElementById('initialScreen').classList.contains('initial-screen')) {
+                setTimeout(startMovingScreen, 800);
+            }
+        }
+
+        function moveNoButton() {
+            const noButton = document.getElementById('noButton') || document.getElementById('movingNoButton');
+            if (!noButton || document.getElementById('loveScreen').classList.contains('hidden') === false) return;
+
+            // Calculate random position within viewport bounds
+            const buttonRect = noButton.getBoundingClientRect();
+            const maxX = window.innerWidth - buttonRect.width - 30;
+            const maxY = window.innerHeight - buttonRect.height - 30;
+            
+            const randomX = Math.random() * maxX + 15;
+            const randomY = Math.random() * maxY + 15;
+            
+            // Move button
+            noButton.style.position = 'fixed';
+            noButton.style.left = randomX + 'px';
+            noButton.style.top = randomY + 'px';
+            noButton.style.zIndex = '1001';
+            noButton.classList.add('no-button-moving');
+            
+            // Update love message
+            updateLoveMessage();
+            
+            // Remove jump animation after it completes
+            setTimeout(() => {
+                noButton.classList.remove('no-button-moving');
+            }, 600);
+        }
+
+        function startMovingScreen() {
+            document.getElementById('initialScreen').style.display = 'none';
+            document.getElementById('movingScreen').classList.remove('hidden');
+            moveNoButton(); // Continue moving NO button
+        }
+
+        function updateLoveMessage() {
+            const movingScreen = document.getElementById('movingScreen');
+            if (movingScreen.classList.contains('hidden')) return;
+            
+            const loveMsg = document.getElementById('loveMessage');
+            loveMsg.textContent = loveMessages[messageIndex % loveMessages.length];
+            messageIndex++;
+        }
+
+        function showLoveScreen() {
+            document.body.innerHTML = `
+                <div class="love-screen" id="loveScreen">
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+                                font-size: clamp(3em, 12vw, 8em); color: #ff4757; text-align: center; 
+                                z-index: 3000; text-shadow: 3px 3px 10px rgba(0,0,0,0.5); 
+                                animation: heartbeat 1s infinite;">
+                        I LOVE YOU TOO<br><span style="color: #ff6b9d; font-size: 0.6em;">AFIFA! 💖💖💖</span>
+                    </div>
+                </div>
+            `;
+            
+            // Start floating messages
+            let floatInterval = setInterval(() => {
+                createFloatingLove();
+            }, 250);
+            
+            // Stop after 30 seconds (optional)
+            setTimeout(() => clearInterval(floatInterval), 30000);
+        }
+
+        function createFloatingLove() {
+            const loveScreen = document.querySelector('.love-screen');
+            const loveText = document.createElement('div');
+            loveText.className = 'floating-love';
+            
+            const messages = [
+                'I LOVE YOU AFIFA! 💖💖💖',
+                'FOREVER YOURS! 😍❤️',
+                'MY HEART IS YOURS! 💕✨',
+                'AFIFA YOU\'RE PERFECT! 🌟💖'
+            ];
+            
+            loveText.innerHTML = messages[Math.floor(Math.random() * messages.length)];
+            loveText.style.left = Math.random() * 100 + '%';
+            loveText.style.animationDuration = (Math.random() * 3 + 5) + 's';
+            
+            loveScreen.appendChild(loveText);
+            
+            setTimeout(() => loveText.remove(), 8000);
+        }
+
+        // Anti-cheat
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('keydown', e => {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) e.preventDefault();
+        });
+
+        // Touch support
+        document.addEventListener('touchmove', (e) => {
+            const touch = e.touches[0];
+            cursor.style.left = (touch.clientX - 12.5) + 'px';
+            cursor.style.top = (touch.clientY - 12.5) + 'px';
+        });
+    </script>
+</body>
+</html>
