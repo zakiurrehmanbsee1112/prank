@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Do You Love Me Afifa? 💖</title>
+    <title>Do You Love Me? 💖</title>
     <style>
         * {
             margin: 0;
@@ -290,7 +290,7 @@
     <div id="initialScreen" class="initial-screen">
         <div class="heart">💖💖💖</div>
         <div class="question">Do you love me</div>
-        <div class="name">Afifa? 🥰</div>
+        <div class="name">? 🥰</div>
         <div class="buttons-initial">
             <button class="btn btn-yes" onclick="handleAnswer('yes')">YES 😍💕</button>
             <button class="btn btn-no" id="noButton" onclick="handleNoClick(event)">NO 😢</button>
@@ -299,8 +299,8 @@
 
     <!-- Moving Screen -->
     <div id="movingScreen" class="moving-screen hidden">
-        <div class="love-message" id="loveMessage">Afifa, you're my everything! 💖</div>
-        <div class="moving-question">Please say YES Afifa? 🥺💕</div>
+        <div class="love-message" id="loveMessage">You're my everything! 💖</div>
+        <div class="moving-question">Please say YES? 🥺💕</div>
         <div class="buttons-moving">
             <button class="btn btn-yes" onclick="handleAnswer('yes')">YES TOO! 😍💖</button>
             <button class="btn btn-no" id="movingNoButton" onclick="handleNoClick(event)">NO 😭</button>
@@ -313,14 +313,14 @@
     <script>
         let messageIndex = 0;
         const loveMessages = [
-            "Afifa, you complete my life! 💖✨",
+            "You complete my life! 💖✨",
             "I can't breathe without you! 😍❤️",
             "Please say YES my love! 🥺💕",
-            "You're my heart Afifa! 💓🌹",
+            "You're my heart! 💓🌹",
             "I love you to the moon! 🌙💫",
-            "Forever yours Afifa! 💍😘",
+            "Forever yours! 💍😘",
             "You make my world perfect! 🌍💖",
-            "My soulmate Afifa! 👫✨"
+            "My soulmate! 👫✨"
         ];
 
         let noClickCount = 0;
@@ -401,7 +401,7 @@
                                 font-size: clamp(3em, 12vw, 8em); color: #ff4757; text-align: center; 
                                 z-index: 3000; text-shadow: 3px 3px 10px rgba(0,0,0,0.5); 
                                 animation: heartbeat 1s infinite;">
-                        I LOVE YOU TOO<br><span style="color: #ff6b9d; font-size: 0.6em;">AFIFA! 💖💖💖</span>
+                        I LOVE YOU TOO<br><span style="color: #ff6b9d; font-size: 0.6em;">! 💖💖💖</span>
                     </div>
                 </div>
             `;
@@ -421,10 +421,10 @@
             loveText.className = 'floating-love';
             
             const messages = [
-                'I LOVE YOU AFIFA! 💖💖💖',
+                'I LOVE YOU! 💖💖💖',
                 'FOREVER YOURS! 😍❤️',
                 'MY HEART IS YOURS! 💕✨',
-                'AFIFA YOU\'RE PERFECT! 🌟💖'
+                'YOU\'RE PERFECT! 🌟💖'
             ];
             
             loveText.innerHTML = messages[Math.floor(Math.random() * messages.length)];
